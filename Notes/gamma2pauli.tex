@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphics,graphfig,graphicx,physics,setspace,indentfirst,graphicx,lipsum}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,enumerate,mathrsfs, bbm}
+\usepackage{qcircuit}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{subfigure}
+
+\newcommand{\id}{\mathbbm{1}}
+\newcommand{\ii}{\mathsf{i}}
+
+\begin{document}
+\begin{center}
+	{\huge \textbf{}}\ \\ {\large Bian Kaiming}
+\end{center}
+
+
+k = 0:
+
+\begin{align*}
+	 & \gamma_0 = \Qcircuit @C=1.0em @R=1.0em @!R { \\
+	 	 & \qw & \qw\\
+	 	 & \qw & \qw\\
+\\ }
+\end{align*}
+
+k = 1:
+
+\begin{align*}
+	 & \gamma_1=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \qw & \qw & \qw\\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+\\ } && \gamma_2=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \qw & \qw & \qw\\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+\\ }\\ 
+	 & \gamma_3=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+\\ } && \gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+\\ }
+\end{align*}
+
+k = 2:
+
+\begin{align*}
+	 & \gamma_1\gamma_2=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \qw & \qw & \qw\\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+\\ } && \gamma_1\gamma_3=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+\\ }\\ 
+	 & \gamma_1\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+\\ } && \gamma_2\gamma_3=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+\\ }\\ 
+	 & \gamma_2\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+\\ } && \gamma_3\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+	 	 & \qw & \qw & \qw\\
+\\ }
+\end{align*}
+
+k = 3:
+
+\begin{align*}
+	 & \gamma_1\gamma_2\gamma_3=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+	 	 & \qw & \qw & \qw\\
+\\ } && \gamma_1\gamma_2\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+	 	 & \qw & \qw & \qw\\
+\\ }\\ 
+	 & \gamma_1\gamma_3\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+	 	 & \gate{\mathrm{X}} & \qw & \qw\\
+\\ } && \gamma_2\gamma_3\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+	 	 & \gate{\mathrm{Y}} & \qw & \qw\\
+\\ }
+\end{align*}
+
+k = 4:
+
+\begin{align*}
+	 & \gamma_1\gamma_2\gamma_3\gamma_4=\Qcircuit @C=1.0em @R=0.2em @!R { \\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+	 	 & \gate{\mathrm{Z}} & \qw & \qw\\
+\\ }
+\end{align*}
+
+
+
+\section{notepad}
+\begin{equation}
+    \Qcircuit @C=1.0em @R=1.0em @!R { 
+	 	 &\lstick{} & \qw & \multigate{5}{\mathrm{MUL}} & \multigate{5}{\mathrm{QFT}} & \multigate{5}{\mathrm{MAP}} & \qw & \qw\\
+	 	 &\lstick{} & \qw & \ghost{\mathrm{MUL}} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MAP}} & \qw & \qw\\
+	 	 &\lstick{} & \qw & \ghost{\mathrm{MUL}} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MAP}} & \qw & \qw
+    \inputgroupv{1}{3}{.75em}{2em}{\ket{\psi}}\\
+	 	 &\lstick{} & \multigate{2}{\mathrm{QFT}} & \ghost{\mathrm{MUL}} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MAP}} & \qw & \qw\\
+	 	 &\lstick{} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MUL}} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MAP}} & \qw & \qw\\
+	 	 &\lstick{} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MUL}} & \ghost{\mathrm{QFT}} & \ghost{\mathrm{MAP}} & \qw & \qw
+		  \inputgroupv{1}{3}{.75em}{2em}{\ket{\psi}}\\
+\\ }.
+\end{equation}
+
+\[
+  \Qcircuit @C=1em @R=.7em {
+    &&& \lstick{\ket{q_n}}     & \multigate{3}{U} & \qw \\
+    &&& \lstick{\ket{q_{n-1}}} & \ghost{U}        & \qw \\
+    &&& \lstick{\ket{q_1}}     & \ghost{U}        & \qw \\
+    &&& \lstick{\ket{q_0}}     & \ghost{U}        & \qw \gategroup{1}{6}{4}{6}{.8em}{\}}
+    \inputgroupv{1}{4}{1.3em}{2.4em}{\ket{\psi}} \\
+	}
+\]
+
+\begin{equation}
+	\Qcircuit @C=1em @R=1.6em {
+\lstick{} & \qw & \qw \\
+\lstick{} & \qw & \qw
+\inputgroup{1}{2}{.75em}{\ket{0^k}}\\
+\lstick{} & \qw & \qw \\
+\lstick{} & \qw & \qw
+\inputgroupv{3}{4}{.8em}{.8em}{\ket{\psi}}\\
+\lstick{A} & \qw & \qw \\
+\lstick{B} & \qw & \qw
+\inputgrouph{5}{6}{.75em}{\ket{\psi}}{2.2em}
+}
+\end{equation}
+\end{document}
