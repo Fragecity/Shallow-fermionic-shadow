@@ -127,8 +127,8 @@ Let $Tp2n(t)$ be the map $phi.alt  T^(("whole"))(1, t) phi.alt^(-1)$, the follow
   node((1, 0), $W$),
   node((1, 2), $W$),
   arr((0,0), (0,2), $T^(("whole"))(1,t)$),
-  arr((0,0), (1,0), $phi.alt$),
-  arr((0,2), (1,2), $phi.alt$),
+  arr((0,0), (1,0), $phi.alt$, "bij"),
+  arr((0,2), (1,2), $phi.alt$, "bij"),
   arr((1,0), (1,2), $Tp2n (t)$),
 )]
 
@@ -211,7 +211,8 @@ Then, the action of  $space phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on t
 caption: [The action of the tensor $phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on the space of second order 2N-dimensional polynomials.]
 )<table:Tp2N>
 
-We can see that, $c_(2i-1)$ and $c_(2i)$ are always the same. So do $c'_(2j-1)$ and $c'_(2j)$. Let $b_i = 2c_(2i-1) = 2c_(2i)$ and $b'_j = 2c'_(2j-1) = 2c'_(2j)$, we could further simplify the action of the tensor in the space of second order N-dimensional polynomials $W_N$. 
+
+The subsript $eta_i$ is defined as $eta_i := 1 - (i mod 2)$.  We can see that, $c_(2i-1)$ and $c_(2i)$ are always the same. So do $c'_(2j-1)$ and $c'_(2j)$. Let $b_i = 2c_(2i-1) = 2c_(2i)$ and $b'_j = 2c'_(2j-1) = 2c'_(2j)$, we could further simplify the action of the tensor in the space of second order N-dimensional polynomials $W_N$. 
 For simplemess, we define a "free" recursive relation in $W_N$
 //  we define a operator $S$ on first order N-dimensional polynomials space
 $
@@ -250,28 +251,36 @@ If we consider the subspace $W'_(2N)$ of $W_(2N)$, where $W'_(2N) := "span"((x_(
   node((2, 0), $W_N$),
   node((2, 2), $W_N$),
   arr((0,0), (0,2), $T^(("whole"))(1,t)$),
-  arr((0,0), (1,0), $phi.alt$, options: "bij"),
-  arr((0,2), (1,2), $phi.alt$, options: "bij"),
+  arr((0,0), (1,0), $phi.alt$, "bij"),
+  arr((0,2), (1,2), $phi.alt$, "bij"),
   arr((1,0), (1,2), $Tp2n(t)$),
-  arr((1,0), (2,0), $phi.alt'$, options: "bij"),
-  arr((1,2), (2,2), $phi.alt'$, options: "bij"),
+  arr((1,0), (2,0), $phi.alt'$, "bij"),
+  arr((1,2), (2,2), $phi.alt'$, "bij"),
   arr((2,0), (2,2), $Tpn(t)$),
 )]
 
 
+For simpliness, let 
+$
+F(y_i) = cases(
+  3/4 y_1 + 1/4 y_2 ", " i = 1,
+  1/4 y_(i-1) + 1/2 y_i + 1/4 y_(i+1) ", " 1<i<N,
+  3/4 y_N + 1/4 y_(N-1) ", " i = N
+)
+$
 Then we get
-#align(center)[
-  #table(
+#figure(table(
     columns: (auto, auto),
     align: center,
-    table.header([$y_i, y_j$], [$Teven Todd$]),
+    table.header([$y_i y_j$], [$Teven Todd$]),
 
     [$i=j=1$],
-    $$
+    $F(y_1)F(y_1)- 5/ 144 (y_1 + y_2)^2 + 1/36 y_1 y_2 $
 
 
-)
-]
+))<table:TpN>
+
+这个table的计算实在是太太太太太折磨人了。详细计算我放在了@section:proofs 中。
 
 
 // Because $T_p(t)(x_i x_j) =  T_p(t)(x_i x_j)   $, we only list the result of $i<=j$. 
@@ -307,27 +316,70 @@ Then we get
 // $
 
 
-= Proofs
+= Proofs<section:proofs>
 
-#proof([of ])[
-  The latest layer of T gates is #Teven, which behaves 
+#proof([of @table:TpN])[
+现在我们想要计算 $Tpn(t)$ 在$W_N$ 中的作用。因此我们需要计算 
+$ 
+ &phi.alt' phi.alt Teven Todd phi.alt^(-1) phi.alt'^(-1) (y_i y_j)\
+=& phi.alt Teven Todd phi.alt^(-1) ( 1/4 (x_(2i-1)+ x_(2i)) (x_(2j-1)+ x_(2j))) \
+=& phi.alt Teven Todd phi.alt^(-1) ( 1/4 (x_(2i-1)x_(2j-1)+x_(2i-1)x_(2j)+ x_(2i)x_(2j-1) +x_(2i)x_(2j)))
 $
-  Teven &supvec(M_(2i+c) (product Z_k) M_(2j+c') )\
- = 1/4 lr(( 
-    &supvec(M_(2i+(-1)^(1-c)) (product Z_k) M_(2j+(-1)^(1-c')) ) + supvec(M_(2i+(-1)^(1-c)) (product Z_k) M_(2j+c') ) \
-    + &supvec(M_(2i+c) (product Z_k) M_(2j+(-1)^(1-c')) ) + supvec(M_(2i+c) (product Z_k) M_(2j+c') )
-  )), 
+相当于对于每一个 $x_(2i-1)x_(2j-1)$ 这样的项进行查表。我们现在来分析不同的y的映射。为了简化符号，这里记 $S_N = phi.alt' phi.alt Teven Todd phi.alt^(-1) phi.alt'^(-1)$, $S_(2N) = phi.alt Teven Todd phi.alt^(-1)$.
+
 $
-if $ 2j+c' > 2i+c+1$. $c$ and $c'$ are the parity of the input state, which take the value $0$ or $1$. Similarly, we write down the output of #Teven in the other cases
+phi.alt' (y_1 y_1) =& 1/4 (x_1x_1 + 2x_1x_2 + x_2x_2) \
+S_N (y_1y_1) = & 1/4 (S_(2N)(x_1x_1) + S_(2N) ( 2x_1x_2) + S_(2N)(x_2x_2)) \
 $
-Teven supvec(M_(2i+c)M_(2i+1+c)) = cases(
-  1/4 lr((
-    supvec(M_(2i)M_(2i+1)) + supvec(M_(2i-1)Z_i M_(2i+1))\ 
-    space.quad supvec(M_(2i)Z_(i+1) M_(2i+2)) + supvec(M_(2i-1)Z_i Z_(i+1) M_(2i+2))
-  )) ", "  space c = 0,
-  1/3 supvec(Z_(2i+1)) + 1/3 supvec(Z_(2i+2)) + 1/3 supvec(M_(2i+1)M_(2i+2))
-)
+
+依据 @table:Tp2N, 我们有
+
 $
+S_N (y_1y_1) = & 1/4 lr((\
+  &longSpace 1/6  ( x₁ +x₂)  (x₁ + x₂) + \
+  &longSpace (1/4)((4/3)x₁ + (4/3)x₂ + x₃ + x₄)(x₁ + x₂) + \ 
+  &longSpace -(1/72)((x₁ + x₂)^2) + (1/24)((x₁ + x₂ + x₃ + x₄)^2) - (1/72)((x₃ + x₄)^2)\
+))  \
+// =& (19/36)(x₁^2) + (19/18)x₁x₂ + (1/3)x₁x₃ + (1/3)x₁x₄ \
+// &+ (19/36)(x₂^2) + (1/3)x₂x₃ + (1/3)x₂x₄ \
+// &+ (1/36)(x₃^2) + (1/18)x₃x₄ + (1/36)(x₄^2)
+&(19/144)(x₁^2) + (19/72)x₁x₂ + (1/12)x₁x₃ + (1/12)x₁x₄ \
+&+ (19/144)(x₂^2) + (1/12)x₂x₃ + (1/12)x₂x₄ \
+&+ (1/144)(x₃^2) + (1/72)x₃x₄ + (1/144)(x₄^2)
+
+$
+
+我们想要和“自由演化”进行对比。而 $y_1 y_1$ 自由演化的结果是
+$
+F(y_1 y_1) = & 1/16 ( 3 y_1+ y_2) ( 3 y_1+ y_2) \
+= & 1/16 (
+ 3/2 x_1 + 3/2 x_2 + 1/2 x_3 + 1/2 x_4) (3/2 x_1 + 3/2 x_2 + 1/2 x_3 + 1/2 x_4) \
+= & (9/64)(x₁^2) + (9/32)x₁x₂ + (3/32)x₁x₃ + (3/32)x₁x₄ \
+&+ (9/64)(x₂^2) + (3/32)x₂x₃ + (3/32)x₂x₄ + (1/64)(x₃^2)\
+& + (1/32)x₃x₄ + (1/64)(x₄^2)
+$
+
+二者之差为
+$
+S_N (y_1y_1) - F(y_1 y_1)=
+&-(5/576)(x₁^2) - (5/288)x₁x₂ - (1/96)x₁x₃ - (1/96)x₁x₄ \
+&- (5/576)(x₂^2) - (1/96)x₂x₃ - (1/96)x₂x₄ \
+&- (5/576)(x₃^2) - (5/288)x₃x₄ - (5/576)(x₄^2)\
+=& - 5/576 (x_1 + x_2 + x_3 + x_4)^2 + 1/144 (x_1 + x_2)(x_3 + x_4) \
+=& - 5/ 144 (y_1 + y_2)^2 + 1/36 y_1 y_2
+$
+
+接下来，算 $S_N (y_1y_2)$
+
+$
+S_N (y_1y_2) = 1/4 (S_(2N)(x_1x_3) + S_(2N) ( x_1x_4) + S_(2N)(x_2x_3) + S_(2N)(x_2x_4))
+$
+
+我崩溃辣
+// 因此，总体来说，
+// $
+// S_N (y_1y_1) = F(y_1y_1) - 
+// $
 ]
 
 
