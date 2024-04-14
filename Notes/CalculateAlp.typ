@@ -100,7 +100,7 @@ The action of the tensor could be simplified by studying the coefficients $P(i,j
 // $
 
 
-= Propagator
+= Propagation in polynomials space
 To simplify the discussion, we start with a special case: $b_1 = 1, b_2 = 0$, and the number of wires is an even number $2N$. In this case, the whole tensor $T^(("whole"))$ could be written as
 $
 T^(("whole"))(1, t) = lr(( Teven Todd )^t) Teven.
@@ -190,8 +190,7 @@ Then, the action of  $space phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on t
   -1/72  (c_i x_(i+eta_i) + c_i x_(i+1+eta_i)) (c'_j x_(j+eta_j) + c'_j x_(j+1+eta_j)) $,
 
   [$1<i<2N$, \ $i$ is even, \ $j = i+1$],
-  $1/12 (c_i x_(i-2+eta_i) + c_i x_(i-1+eta_i)+ c_i x_(i+eta_i) + c_i x_(i+1+eta_i) ) \
-  (c'_j x_(j-2+eta_j) + c'_j x_(j-1+eta_j)+ c'_j x_(j+eta_j) + c'_j x_(j+1+eta_j) ) \
+  $1/12 c_i c_j'(c_i x_(i-2+eta_i) + c_i x_(i-1+eta_i)+ c_i x_(i+eta_i) + c_i x_(i+1+eta_i) )^2 \
   -1/36  (c_i x_(i-2+eta_i) + c_i x_(i-1+eta_i)) (c'_j x_(j-2+eta_j) + c'_j x_(j-1+eta_j)) \
   -1/36  (c_i x_(i+eta_i) + c_i x_(i+1+eta_i)) (c'_j x_(j+eta_j) + c'_j x_(j+1+eta_j)) $,
 
@@ -258,7 +257,11 @@ If we consider the subspace $W'_(2N)$ of $W_(2N)$, where $W'_(2N) := "span"((x_(
   arr((1,2), (2,2), $phi.alt'$, "bij"),
   arr((2,0), (2,2), $Tpn(t)$),
 )]
-
+#let y1 = $y_1$
+#let y2 = $y_2$
+#let y3 = $y_3$
+#let yi = $y_i$
+#let yj = $y_j$
 
 For simpliness, let 
 $
@@ -272,10 +275,57 @@ Then we get
 #figure(table(
     columns: (auto, auto),
     align: center,
+    inset: 14pt,
     table.header([$y_i y_j$], [$Teven Todd$]),
 
     [$i=j=1$],
-    $F(y_1)F(y_1)- 5/ 144 (y_1 + y_2)^2 + 1/36 y_1 y_2 $
+    $F(y_1)F(y_1)- 5/ 144 (y_1 + y_2)^2 + 1/36 y_1 y_2 $,
+
+    [$i=1, j=2$],
+    $F(y1) F(y2) + (5/144) (y1^2) + (1/24) y1 y2 + (1/72) (y2^2)$,
+
+    [$i=1, j=3$],
+    $F(y1) F(y3) + 1/48 y2^2$,
+
+    // [$i=1, j>3$],
+    // $F(y1) F(yj)$,
+
+
+    [$1<i<N, j=i$],
+    {
+    let y0 = $y_(i-1)$
+    let y1 = $y_i$
+    let y2 = $y_(i+1)$
+    $
+    F(yi ) F(yi)   -5/144 y0^2 - 5/48 y0 y1 - 1/16 y0 y2 \
+    - (1/9) (y1^2) - (5/48) y1 y2 - (5/144) (y2^2)
+    $},
+
+
+    [$1<i<N, j=i+1$],
+    {
+    let y0 = $y_(i-1)$
+    let y1 = $y_i$
+    let y2 = $y_(i+1)$
+    let y3 = $y_(i+2)$
+    $
+    F(yi ) F(y2)  + 1/72 y1^2 + 1/24 y1 y2 + 1/72 y2^2
+    $
+    },
+
+    [$1<i<N, j=i+2$],
+    $
+    F(yi ) F(y_(i+2)) + 1/48 y_(i+1)^2
+    $,
+
+    [$i= j=N$],
+    $F(y_N)F(y_N)- 5/ 144 (y_N + y_(N-1))^2 + 1/36 y_(N-1) y_N $,
+
+    [other cases when $i<=j$],
+    $
+    F(yi ) F(yj) 
+    $,
+
 
 
 ))<table:TpN>
@@ -283,6 +333,91 @@ Then we get
 这个table的计算实在是太太太太太折磨人了。详细计算我放在了@section:proofs 中。
 
 
+= The interaction term
+
+let $b(i,j,t) = P_1 (i,t) P_N (j,t) + I(i,j,t)  $. Then, 
+$
+ket(psi(t)) = sum_(i,j) P_1 (i,t) P_N (j,t) yi yj + sum_(i,j) I(i,j,t) yi yj.
+$<eq:interaction_state>
+From simpleness, let the terms in @table:TpN be $F(y_i) F(y_j) + R(i,j)$. Then we get
+
+$
+ket(psi(t+1))
+ =& sum_(i,j) P_1 (i,t) P_N (j,t) (F(yi) F(yj)+ R(i,j)) + sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))\
+=&  sum_(i,j) P_1 (i,t+1) P_N (j,t+1) y_i y_j + sum_(i,j) P_1 (i,t) P_N (i,t) R(i,j) \
+&+sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))
+$
+
+这里又又又为了简洁性， 定义 
+$
+F_f^((1)): "Func"(i,j,t) |->  cases(1/4 "Func"(i-1,j,t) + ... "if ...",  3/4 "Func"(i,j,t)+ ... "if i = 1" )\
+F_f^((2)): "Func"(i,j,t) |->  cases(1/4 "Func"(i,j-1,t) + ... "if ...",  3/4 "Func"(i,j,t)+ ... "if j = 1" )
+$  By using Eq. @eq:interaction_state to expand $ket(psi(t+1))$,  we have
+$
+I(i,j,t+1) &= (partial)/(partial y_i) (partial)/(partial y_j)lr( (sum_(i,j) P_1 (i,t) P_N (i,t) R(i,j) +sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))) ) \ 
+&= F_f^((1))  (I)(i,j,t) F_f^((2))  (I)(i,j,t)
+\ +& 
+$
+
+// from the @table:TpN, we get
+
+#figure(table(
+    columns: (auto, auto),
+    align: center,
+    inset: 14pt,
+    table.header([$y_i y_j$], [$Teven Todd$]),
+
+    [$i=j=1$],
+    $F(y_1)F(y_1)- 5/ 144 (y_1 + y_2)^2 + 1/36 y_1 y_2 $,
+
+    [$i=1, j=2$],
+    $F(y1) F(y2) + (5/144) (y1^2) + (1/24) y1 y2 + (1/72) (y2^2)$,
+
+    [$i=1, j=3$],
+    $F(y1) F(y3) + 1/48 y2^2$,
+
+    // [$i=1, j>3$],
+    // $F(y1) F(yj)$,
+
+
+    [$1<i<N, j=i$],
+    {
+    let y0 = $y_(i-1)$
+    let y1 = $y_i$
+    let y2 = $y_(i+1)$
+    $
+    F(yi ) F(yi)   -5/144 y0^2 - 5/48 y0 y1 - 1/16 y0 y2 \
+    - (1/9) (y1^2) - (5/48) y1 y2 - (5/144) (y2^2)
+    $},
+
+
+    [$1<i<N, j=i+1$],
+    {
+    let y0 = $y_(i-1)$
+    let y1 = $y_i$
+    let y2 = $y_(i+1)$
+    let y3 = $y_(i+2)$
+    $
+    F(yi ) F(y2)  + 1/72 y1^2 + 1/24 y1 y2 + 1/72 y2^2
+    $
+    },
+
+    [$1<i<N, j=i+2$],
+    $
+    F(yi ) F(y_(i+2)) + 1/48 y_(i+1)^2
+    $,
+
+    [$i= j=N$],
+    $F(y_N)F(y_N)- 5/ 144 (y_N + y_(N-1))^2 + 1/36 y_(N-1) y_N $,
+
+    [other cases when $i<=j$],
+    $
+    F(yi ) F(yj) 
+    $,
+
+
+
+))<table:recursive>
 // Because $T_p(t)(x_i x_j) =  T_p(t)(x_i x_j)   $, we only list the result of $i<=j$. 
 // $
 //  phi.alt  space.quarter Teven Todd phi.alt^(-1) (sum c_i c_j x_i x_j)
@@ -371,11 +506,113 @@ $
 
 接下来，算 $S_N (y_1y_2)$
 
+
+
 $
-S_N (y_1y_2) = 1/4 (S_(2N)(x_1x_3) + S_(2N) ( x_1x_4) + S_(2N)(x_2x_3) + S_(2N)(x_2x_4))
+S_N (y_1y_2) =& 1/4 (S_(2N)(x_1x_3) + S_(2N) ( x_1x_4) + S_(2N)(x_2x_3) + S_(2N)(x_2x_4)) \
+=& 1/4(\
+  & 1/8 (4/3 x₁ + 4/3 x₂ + x₃ + x₄)(x₁ + x_2)  \
+  &+ 1/8 ( x₃ + x₄ + x_5 + x_6)(x₁ + x_2)  \
+  // &+ 1/12 ( x₁ +  x₂ + x₃ + x₄)^2 \
+  &-(1/36)((x₁ + x₂)^2) + (1/12)((x₁ + x₂ + x₃ + x₄)^2) - (1/36)((x₃ + x₄)^2) \
+  & + 1/16 ( x₁ +  x₂ + x₃ + x₄)( x₃ + x₄ + x_5 + x_6) + 1/48 (x₃ + x₄)^2\
+
+)
+=& (2/9)(y1^2) + (23/48)y1 y2 + (3/16)y1 y3 + (5/36)(y2^2) + (1/16)y2 y3
 $
 
-我崩溃辣
+$F(y1) F(y2) = (3/4y1 + 1/4y2) (1/4y1+1/2 y2 + 1/4 y3) $
+
+$
+S_N (y_1y_2) =& F(y1) F(y2) + (5/144) (y1^2) + (1/24) y1 y2 + (1/72) (y2^2)
+$
+
+接下来，算 $S_N (y_1y3)$
+
+$
+S_N (y_1y3) = F(y1)F(y3) + 1/48 y2^2
+$
+
+然后， $j>3$时
+
+$
+S_N (y_1yj) = F(y1)F(yj)
+$
+
+然后， $i>1, i=j$时,
+
+
+#let x2i1 = $x_(2i-1)$
+#let x2i = $x_(2i)$
+#let x2j1 = $x_(2j-1)$
+#let x2j = $x_(2j)$
+$
+S_N (yi yj) =& 1/4(S_N  (x_(2i-1)x_(2j-1))+S_N (x_(2i-1)x_(2j))+ S_N (x_(2i)x_(2j-1)) + S_N (x_(2i)x_(2j))) \
+=& 1/4(S_N  (x_(2i-1)x_(2i-1))+2 S_N (x_(2i-1)x_(2i)) + S_N  (x_(2i)x_(2i))) \
+=& 1/4(\
+  &1/24 (x_(2i-3) + x_(2i-2) + x_(2i-1) + x_(2i))^2 \
+  &- 1/72 (x_(2i-3) + x_(2i-2))^2 - 1/72 (x_(2i-1) + x_(2i))^2\
+  &+ 1/24 (x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2))^2 \
+  &- 1/72 (x_(2i-1) + x_(2i))^2 - 1/72 (x_(2i+1) + x_(2i+2))^2\
+  & + 1/16 (x_(2i-3) + x_(2i-2) + x_(2i-1) + x_(2i))(x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2)) \
+  & + 1/48 (x_(2i-1) + x_(2i))^2\
+) \
+=& 1/24 (y_(i-1) + y_i)^2 - 1/72 (y_(i-1))^2 - 1/72 (yi)^2\
+  &+ 1/24 (yi + y_(i+1))^2 - 1/72 (yi)^2 - 1/72 (y_(i+1))^2\
+  & + 1/16 (y_(i-1) + y_i)(yi + y_(i+1)) +1/48 (y_i)^2\
+$
+
+#{let y0 = $y_(i-1)$
+  let y1 = $y_i$
+  let y2 = $y_(i+1)$
+$
+S_N (yi yj) =& F(yi ) F(yj)   -(5/144) (y0^2) - (5/48) y0 y1 - (1/16) y0 y2 \
+&- (1/9) (y1^2) - (5/48) y1 y2 - (5/144) (y2^2)
+$}
+
+#{
+[然后， $i>1, j=i+1$时,]
+
+$
+S_N (yi yj) 
+=& 1/4(S_N  (x_(2i-1)x_(2i+1))+ S_N (x_(2i-1)x_(2i+2)) + S_N  (x_(2i)x_(2i+1)) + S_N  (x_(2i)x_(2i+2)) )\
+=& 1/4(\
+&  1/16 (x_(2i-3) + x_(2i-2) + x_(2i-1) + x_(2i))(x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2)) \
+  & + 1/48 (x_(2i-1) + x_(2i))^2 \
+& + 1/16 (x_(2i-3) + x_(2i-2) + x_(2i-1) + x_(2i))(x_(2i+1) + x_(2i+2) + x_(2i+3) + x_(2i+4))\
+&+ 1/12 (x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2))^2 \
+  &- 1/36 (x_(2i-1) + x_(2i))^2 - 1/36 (x_(2i+1) + x_(2i+2))^2\
+  &+ 1/16 (x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2))(x_(2i+1) + x_(2i+2) + x_(2i+3) + x_(2i+4)) \
+  & + 1/48 (x_(2i+1) + x_(2i+2))^2 \
+//   &1/24 (x_(2i-3) + x_(2i-2) + x_(2i-1) + x_(2i))^2 \
+//   &- 1/72 (x_(2i-3) + x_(2i-2))^2 - 1/72 (x_(2i-1) + x_(2i))^2\
+//   &+ 1/24 (x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2))^2 \
+//   &- 1/72 (x_(2i-1) + x_(2i))^2 - 1/72 (x_(2i+1) + x_(2i+2))^2\
+//   & + 1/16 (x_(2i-3) + x_(2i-2) + x_(2i-1) + x_(2i))(x_(2i-1) + x_(2i) + x_(2i+1) + x_(2i+2)) \
+//   & + 1/48 (x_(2i-1) + x_(2i))^2\
+) \
+// =& 1/24 (y_(i-1) + y_i)^2 - 1/72 (y_(i-1))^2 - 1/72 (yi)^2\
+// =  &+ 1/24 (yi + y_(i+1))^2 - 1/72 (yi)^2 - 1/72 (y_(i+1))^2\
+ = &  1/16 (y_(i-1) + y_i)(yi + y_(i+1)) +1/48 (y_i)^2\
+  & + 1/16 (y_(i) + y_(i+1))(y_(i+1) + y_(i+2)) +1/48 (y_(i+1))^2\
+  &+ 1/16 (y_(i-1)+ yi) (y_(i+1) + y_(i+2)) \
+  & + 1/12 (y_i + y_(i+1))^2 - 1/36 (y_i)^2 - 1/36 (y_(i+1))^2\
+$
+
+  let y0 = $y_(i-1)$
+  let y1 = $y_i$
+  let y2 = $y_(i+1)$
+  let y3 = $y_(i+2)$
+$
+S_N (yi yj) =& F(yi ) F(yj)  + (1/72) (y1^2) + (1/24) y1 y2 + (1/72) (y2^2)
+$
+
+}
+
+
+
+
+// / / 我崩溃辣
 // 因此，总体来说，
 // $
 // S_N (y_1y_1) = F(y_1y_1) - 

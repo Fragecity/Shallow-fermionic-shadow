@@ -54,6 +54,8 @@
     ),
   )
    
+   show figure: set block(breakable: true)
+   
   show heading.where(level: 1): it=>{
 
     set text(
