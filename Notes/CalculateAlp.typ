@@ -83,7 +83,8 @@ where $b_1, b_2 in {0,1}$, $t + b_1$ stands for the number of layers.
 The output states must in the vector space spaned by the following basis
 //  $"span"{T^d supvec(gamma_1 gamma_(2n)) bar.v  d in ZZ} $. The basis of this vector space are
 $
-supvec(Z_i), space.quad supvec(X_i (product_(k = i+1)^(j-1) Z_k) Y_j )
+supvec(Z_i), space.quad supvec(X_i (product_(k = i+1)^(j-1) Z_k) X_j ) , space.quad supvec(X_i (product_(k = i+1)^(j-1) Z_k) Y_j ) , \
+space.quad supvec(Y_i (product_(k = i+1)^(j-1) Z_k) X_j ), space.quad supvec(Y_i (product_(k = i+1)^(j-1) Z_k) Y_j )
 $
 
 Let $M_i = 1/sqrt(2) ( X_i + Y_i) $, the space
@@ -217,7 +218,7 @@ For simplemess, we define a "free" recursive relation in $W_N$
 $
 P( i, t+1) = cases(
   1/4 (P(i-1, t) + 2 P(i, t) + P (i+1, t) ) ", " i eq.not 1 "or" N ,
-  1/4 (P(i-1, t) + 2 P(i, t) + P (i+1, t))
+  1/4 (P(i-1, t) + 2 P(i, t) + P (i+1, t))", " i eq  1 "or" N 
 ).
 $<eq:free_recursive_equation>
 
@@ -297,8 +298,8 @@ Then we get
     let y1 = $y_i$
     let y2 = $y_(i+1)$
     $
-    F(yi ) F(yi)   -5/144 y0^2 - 5/48 y0 y1 - 1/16 y0 y2 \
-    - (1/9) (y1^2) - (5/48) y1 y2 - (5/144) (y2^2)
+      F(yi ) F(yi)   -5/144 y0^2 - 5/48 y0 y1 - 1/16 y0 y2 \
+    - 1/9 y1^2 - 5/48 y1 y2 - 5/144 y2^2
     $},
 
 
@@ -328,7 +329,9 @@ Then we get
 
 
 
-))<table:TpN>
+),
+caption: [The action of the tensor $Teven Todd$ on the space of second order N-dimensional polynomials.]
+)<table:TpN>
 
 这个table的计算实在是太太太太太折磨人了。详细计算我放在了@section:proofs 中。
 
@@ -337,15 +340,15 @@ Then we get
 
 let $b(i,j,t) = P_1 (i,t) P_N (j,t) + I(i,j,t)  $. Then, 
 $
-ket(psi(t)) = sum_(i,j) P_1 (i,t) P_N (j,t) yi yj + sum_(i,j) I(i,j,t) yi yj.
+ket(psi(t)) = sum_(i,j) P_1 (i,t) P_N (j,t) yi yj - sum_(i,j) I(i,j,t) yi yj.
 $<eq:interaction_state>
 From simpleness, let the terms in @table:TpN be $F(y_i) F(y_j) + R(i,j)$. Then we get
 
 $
 ket(psi(t+1))
- =& sum_(i,j) P_1 (i,t) P_N (j,t) (F(yi) F(yj)+ R(i,j)) + sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))\
+ =& sum_(i,j) P_1 (i,t) P_N (j,t) (F(yi) F(yj)+ R(i,j)) - sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))\
 =&  sum_(i,j) P_1 (i,t+1) P_N (j,t+1) y_i y_j + sum_(i,j) P_1 (i,t) P_N (i,t) R(i,j) \
-&+sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))
+&- sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))
 $
 
 这里又又又为了简洁性， 定义 
@@ -354,70 +357,117 @@ F_f^((1)): "Func"(i,j,t) |->  cases(1/4 "Func"(i-1,j,t) + ... "if ...",  3/4 "Fu
 F_f^((2)): "Func"(i,j,t) |->  cases(1/4 "Func"(i,j-1,t) + ... "if ...",  3/4 "Func"(i,j,t)+ ... "if j = 1" )
 $  By using Eq. @eq:interaction_state to expand $ket(psi(t+1))$,  we have
 $
-I(i,j,t+1) &= (partial)/(partial y_i) (partial)/(partial y_j)lr( (sum_(i,j) P_1 (i,t) P_N (i,t) R(i,j) +sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))) ) \ 
-&= F_f^((1))  (I)(i,j,t) F_f^((2))  (I)(i,j,t)
-\ +& 
+&I(i,j,t+1) \
+=& -(partial)/(partial y_i) (partial)/(partial y_j)lr( (sum_(i,j) P_1 (i,t) P_N (i,t) R(i,j) -sum_(i,j) I(i,j,t) (F(yi) F(yj)+ R(i,j))) ) \ 
+=& F_f^((1))  (I)(i,j,t) F_f^((2))  (I)(i,j,t) - sum_(l,k) (partial)/(partial y_i) (partial)/(partial y_j) lr(((P_1(l,t)P_N (k,t) - I(l,k,t))R(l,k)), size:#160% )
+$<eq:interaction_coeff>
+
+可以从表中看见，仅当 $l in {i-1, i, i+1} sect ZZ_+ $, $k in {j-1, j, j+1} sect ZZ_+ $, $abs(l-k) <= 2$ 时，Eq. @eq:interaction_coeff 中的第二项才不为0。同时，我们知道，若其不为0，则有
 $
-
+-1/9 <= (partial)/(partial y_i) (partial)/(partial y_j) R(l,k) <= 1/24.
+$
 // from the @table:TpN, we get
+由它们的系数 $b(i,j,t)>0$，我们可以知道 $P_1(l,t)P_N (k,t) > I(l,k,t)$ 对所有时刻 $t$ 恒成立。
 
-#figure(table(
+
+由于初始状态下，$I(i,j,t) = 0 forall i,j$。 
+
+// 假设在某一时刻 $I(i,j,t) = beta P_1(i,t)P_N (j,t)$, $beta >= 1/2$。那么由式 @eq:interaction_coeff 可以得到
+
+// $
+// I(i,j,t+1) = beta P_1(i,t+1)P_N (j,t+1) - (1-beta) sum (partial^2 ) /(partial  yi partial y_j) P_1(l,t)P_N (k,t)R(l,k)
+
+// $
+现在我们来看一下第二项会是什么。这里主要就是看R是什么。
+这时候我们又开始快乐打表了。打表的一些细节仍然放在 @section:proofs 中。为了简单，在下面表格中用$D_(i j)$指代 $P_1(i,t)P_j(i,t)$ 或 $ I(i,j,t)$ 。 这里需要注意的是，$yi yi$ 产生的 $yi y_(i+1)$ 会写成 $yi y_(i+1) + y_(i+1) yi$。因此，在生成下述表格时，$j=i+1$ 那一栏中，在从@table:TpN 中写出$ D_(i i )$ 的系数时需要除一个2。
+
+// 而当我们想分析 $b(i,j,t)$ 下届的时候，只需要分析 $I(l,k,t)$ 的上界即可，而这又是由 $(partial^2 ) /(partial yi y_j) R$ 的下界决定的。
+
+#let D(i,j) = $D_(i j)$
+#figure(
+  
+  table(
     columns: (auto, auto),
-    align: center,
+    align: (horizon, center),
     inset: 14pt,
-    table.header([$y_i y_j$], [$Teven Todd$]),
+    table.header([$D(i,j,t+1)$], [$sum (partial^2 ) /(partial yi partial y_j) D_(l k) R(l,k)$]),
 
     [$i=j=1$],
-    $F(y_1)F(y_1)- 5/ 144 (y_1 + y_2)^2 + 1/36 y_1 y_2 $,
+    $ 5/144 ( - D_(1 1) - D_(2 2) + D_(1 2) + D_(2 1))$,
 
     [$i=1, j=2$],
-    $F(y1) F(y2) + (5/144) (y1^2) + (1/24) y1 y2 + (1/72) (y2^2)$,
+    $ -1/48 D_(1 1 ) + 1/24 D_(1 2) - 5/96 D_(2 2)$,
 
-    [$i=1, j=3$],
-    $F(y1) F(y3) + 1/48 y2^2$,
-
-    // [$i=1, j>3$],
-    // $F(y1) F(yj)$,
-
-
-    [$1<i<N, j=i$],
-    {
-    let y0 = $y_(i-1)$
-    let y1 = $y_i$
-    let y2 = $y_(i+1)$
+    [$1<i=j<N$],
     $
-    F(yi ) F(yi)   -5/144 y0^2 - 5/48 y0 y1 - 1/16 y0 y2 \
-    - (1/9) (y1^2) - (5/48) y1 y2 - (5/144) (y2^2)
-    $},
-
+    mat(-5/144, 1/72, 1/48; 1/72, -1/9, 1/72; 1/48, 1/72, -5/144)
+    $,
 
     [$1<i<N, j=i+1$],
-    {
-    let y0 = $y_(i-1)$
-    let y1 = $y_i$
-    let y2 = $y_(i+1)$
-    let y3 = $y_(i+2)$
-    $
-    F(yi ) F(y2)  + 1/72 y1^2 + 1/24 y1 y2 + 1/72 y2^2
-    $
-    },
+    $ - 5/96 D_(i i) + 1/24 D_(i, i+1)  - 5/96 D_(i+1, i+1) $,
 
-    [$1<i<N, j=i+2$],
+    [$i=N$],
     $
-    F(yi ) F(y_(i+2)) + 1/48 y_(i+1)^2
-    $,
-
-    [$i= j=N$],
-    $F(y_N)F(y_N)- 5/ 144 (y_N + y_(N-1))^2 + 1/36 y_(N-1) y_N $,
-
-    [other cases when $i<=j$],
-    $
-    F(yi ) F(yj) 
+     5/144 ( - D_(N, N) - D_(N-1, N-1) + D_(N, N-1) + D_(N-1, N))
     $,
 
 
+), 
+caption: [The action of the operator $(partial^2 ) /(partial yi partial y_j)$ on the terms in @table:TpN.]
+)<table:inter_bond>
 
-))<table:recursive>
+令 $ I_(i,j) = I(i,j,t+1) = I(i,j,t)$，则由 @eq:interaction_coeff
+$
+I_(i, j) = F_f^((1))  (I)(i,j,t) F_f^((2))  (I)(i,j,t) - sum_(l,k) (partial)/(partial y_i) (partial)/(partial y_j) lr(((P_1(l,t)P_N (k,t) - I(l,k,t))R(l,k)), size:#160% )
+$
+再进行一个均匀的线性组合，有
+$
+&0=1/N^2 sum_(i,j) (I_(i, j) - F_f^((1))  (I)(i,j,t) F_f^((2)) (I)(i,j,t)) \
+=&- 1/N^2 sum_(i,j) sum_(l,k) (partial)/(partial y_i) (partial)/(partial y_j) lr(((P_1(l,t)P_N (k,t) - I(l,k,t))R(l,k)), size:#160% )\
+// =&- 1/N^2 sum_(i,j) sum_(l,k) (partial)/(partial y_i) (partial)/(partial y_j) lr(((P_1(l,t)P_N (k,t) - I(l,k,t))R(l,k)), size:#160% )
+$
+通过查表@table:inter_bond，和一些代数游戏，可以得到
+$
+ &1/48 sum_(i=1)^(N-2) P_1(i,t)P_N (i+2,t) + 1/48 sum_(i=3)^(N) P_1(i,t)P_N (i-2,t) \
+ &+ 5/72 sum_(i=1)^(N-1) P_1(i,t)P_N (i+1,t) + 5/72 sum_(i=2)^(N) P_1(i,t)P_N (i-1,t) \
+ &- 7/18 sum_(i=2)^(N-1) P_1(i,t)P_N (i,t) - 1/9 P_1(1,t)P_N (1,t) - 1/9 P_1(N,t)P_N (N,t)
+$
+
+#figure(
+  
+  table(
+    columns: (auto, auto),
+    align: (horizon, center),
+    inset: 14pt,
+    table.header([$i,j$], [$sum (partial^2 ) /(partial yi partial y_j) D_(l k) R(l,k)$]),
+
+    [$i=j=1$],
+    $ 5/144 ( - D_(1 1) - D_(2 2) + D_(1 2) + D_(2 1))$,
+
+    [$i=1, j=2$],
+    $ -1/24 D_(1 1 ) + 1/24 D_(1 2) - 5/48 D_(2 2)$,
+
+    [$1<i=j<N$],
+    $
+    mat(-5/144, 1/72, 1/48; 1/72, -1/9, 1/72; 1/48, 1/72, -5/144)
+    $,
+
+    [$1<i<N, j=i+1$],
+    $ - 5/48 D_(i i) + 1/24 D_(i, i+1)  - 5/48 D_(i+1, i+1) $,
+
+    [$i=N$],
+    $
+     5/144 ( - D_(N, N) - D_(N-1, N-1) + D_(N, N-1) + D_(N-1, N))
+    $,
+
+
+), 
+)
+
+
+
+
+
 // Because $T_p(t)(x_i x_j) =  T_p(t)(x_i x_j)   $, we only list the result of $i<=j$. 
 // $
 //  phi.alt  space.quarter Teven Todd phi.alt^(-1) (sum c_i c_j x_i x_j)
@@ -478,7 +528,7 @@ S_N (y_1y_1) = & 1/4 lr((\
 // =& (19/36)(x₁^2) + (19/18)x₁x₂ + (1/3)x₁x₃ + (1/3)x₁x₄ \
 // &+ (19/36)(x₂^2) + (1/3)x₂x₃ + (1/3)x₂x₄ \
 // &+ (1/36)(x₃^2) + (1/18)x₃x₄ + (1/36)(x₄^2)
-&(19/144)(x₁^2) + (19/72)x₁x₂ + (1/12)x₁x₃ + (1/12)x₁x₄ \
+=&(19/144)(x₁^2) + (19/72)x₁x₂ + (1/12)x₁x₃ + (1/12)x₁x₄ \
 &+ (19/144)(x₂^2) + (1/12)x₂x₃ + (1/12)x₂x₄ \
 &+ (1/144)(x₃^2) + (1/72)x₃x₄ + (1/144)(x₄^2)
 
@@ -611,13 +661,217 @@ $
 
 
 
-
 // / / 我崩溃辣
 // 因此，总体来说，
 // $
 // S_N (y_1y_1) = F(y_1y_1) - 
 // $
 ]
+
+
+
+#proof([of @table:inter_bond])[
+观察 @table:TpN，仅有 $y1 y1, y1 y2, y2 y1, y2 y2$的项可以对 $I(1,1,t+1)$ 产生贡献。因此，
+$
+&(partial^2 ) /(partial yi y_j) P_1(l,t)P_N (k,t)R(l,k) \
+=&  5/144 ( - P_1(1,t)P_N (1,t) -P_1(2,t)P_N (2,t) + P_1(1,t)P_N (2,t) + P_1(2,t)P_N (1,t)) \
+= & -5/144 (P_1(1,t) - P_1 (2,t))(P_N (1,t) - P_N (2,t)) 
+$
+
+现在重要的就是确认这一项的符号。好在我们是知道P的具体形式的。由 Eq.@eq:propagator 可以得到
+
+#{
+  let pk = $ (pi k)/N $
+  let pk2 = $ (pi k)/(2N) $
+$
+P_1 (n,t) =& 1/N + 2/N sum_(k = 1)^(N-1) cos((n-1/2) (pi k )/N)cos^(2t+1)((pi k )/ (2N))\
+
+
+
+P_N (n,t) =& 1/N + 2/N sum_(k = 1)^(N-1)  (-1)^k cos((n-1/2) (pi k )/N)cos^(2t+1)((pi k )/ (2N)) \ 
+
+$
+
+
+// [那么，由此可以计算出]
+// $
+// P_1(1,t) =& 1/N + 2/N sum_(k = 1)^(N-1) cos^(2t+2)((pi k )/ (2N))\
+// P_1(2,t) =& 1/N + 2/N sum_(k = 1)^(N-1) cos(3/2 pk)  cos^(2t+1)((pi k )/ (2N))\
+// P_N (1,t) =& 1/N + 2/N sum_(k = 1)^(N-1) (-1)^k cos^(2t+2)((pi k )/ (2N))\
+// P_N (2,t) =& 1/N + 2/N sum_(k = 1)^(N-1) (-1)^k cos(3/2 pk)  cos^(2t+1)((pi k )/ (2N))\
+
+// $
+
+// $
+
+// &(P_1(1,t) - P_1 (2,t))(P_N (1,t) - P_N (2,t))\
+// =&(sum cos^(2t+1)((pi k )/ (2N)) (cos(pk2) - cos(3/2 pk)) )\
+// &times (sum (-1)^k cos^(2t+1)((pi k )/ (2N)) (cos(pk2) - cos(3/2 pk))) \
+// =& 4(sum cos^(2t+1)((pi k )/ (2N)) sin((2 pi k) /N)sin((pi k) /N) )\
+// &times (sum (-1)^k cos^(2t+1)((pi k )/ (2N)) (cos(pk2) - cos(3/2 pk)))
+// $
+
+// [由于 $ 0< pk2<= pi/2$, $cos (pk2)>0$。 ]
+
+}
+由 @lemma:P_monotone 可以得到， $P_1(1,t) - P_1 (2,t) < 0$, $P_N (1,t) - P_N (2,t) > 0$。因此， $I(1,1,t+1) > 0$。
+
+
+// #box[1231231]
+
+当 $i = 1, j = 2$ 时
+$
+&(partial^2 ) /(partial yi partial y_j) P_1(l,t)P_N (k,t)R(l,k) \
+=&  -1/144 P_1(1)P_N (1) + 1/24 P_1(1)P_N (2) \
+&+ 1/24 P_1(2)P_N (1) -5/48 P_1(2)P_N (2) 
+$
+当 $i = j =2$ 时
+$
+&(partial^2 ) /(partial yi partial y_j) P_1(l,t)P_N (k,t)R(l,k) \
+=&  -5/144 P_1(1)P_N (1) + 1/72 P_1(1)P_N (2) + 1/48 P_1(1)P_N (3)\
+& +1/72 P_1(2)P_N (1) - 1/9 P_1(2)P_N (2) + 1/72 P_1(2)P_N (3)\
+&+1/48 P_1(3)P_N (1) + 1/72 P_1(3)P_N (2) - 5/144 P_1(3)P_N (3)\
+=&mat(P_N (1),P_N (2), P_N (3) ) mat(-5/144, 1/72, 1/48; 1/72, -1/9, 1/72; 1/48, 1/72, -5/144) mat(P_1(1); P_1(2); P_1(3))\
+$
+
+可以看到，当 $1 < i = j < N$ 时 $(partial^2 ) /(partial yi partial y_j)P_1(l,t)P_N (k,t)R(l,k)$ 都符合上述形式。因此，我们可以得到 
+
+$
+&sum_(i) (partial^2 ) /(partial yi^2)P_1(l,t)P_N (k,t)R(l,k)\
+=& sum mat(P_N (i-1),P_N (i), P_N (i+1) ) mat(-5/144, 1/72, 1/48; 1/72, -1/9, 1/72; 1/48, 1/72, -5/144) mat(P_1(i-1); P_1(i); P_1(i+1)) \
+=& sum tr(
+  mat(-5/144, 1/72, 1/48; 1/72, -1/9, 1/72; 1/48, 1/72, -5/144)
+  mat(P_1(i-1); P_1(i); P_1(i+1))
+  mat(P_N (i-1),P_N (i), P_N (i+1) )
+)
+$
+现在来看看后面这个矩阵
+$
+cal(M) =  sum mat(P_1(i-1); P_1(i); P_1(i+1))
+  mat(P_N (i-1),P_N (i), P_N (i+1) )
+$
+其矩阵元为
+$
+cal(M)_(l,m) = sum_(k=2)^(N-1) P_1(k+xi_l)P_N (k+xi_m) 
+$
+其中，$xi_l = -1,0,1$。我们知道 $sum P_1(i,t) = sum P_N(i,t) = 1$。
+]
+
+
+
+#let pk = $ (pi k)/N $
+#let pk2 = $ (pi k)/(2N) $
+
+
+#lemma[
+$P_1(i,t)$ 随着$i$ 单减， $P_N (i,t)$ 随着$i$ 单增。
+]<lemma:P_monotone>
+#proof[
+// 令 $f(i,j,t) = P_1 (i,t)P_N (j,t)$.
+
+先将 $P(i,t)$ 从整数域延拓到实数域上。这样就可以对i进行求导。此时，由 Eq.@eq:propagator 可以得到
+
+#{
+  let pk = $ (pi k)/N $
+  let pk2 = $ (pi k)/(2N) $
+$
+P_1 (x,t) =& 1/N + 2/N sum_(k = 1)^(N-1) cos((x-1/2) (pi k )/N)cos^(2t+1)((pi k )/ (2N))\
+
+partial / (partial x) P_1 (x,t) =& -(2 pi)/N   sum k/N sin((x-1/2) pk)  cos^(2t+1)((pi k )/ (2N)) \
+partial / (partial t) P_1 (x,t) =& 2/N sum cos[(k pi)/(2 N)]^(1 + 2 t)
+   cos[((-(1/2) + i) k pi)/N]  ln(cos^2((k pi)/(2 N)))    \
+
+
+P_N (x,t) =& 1/N + 2/N sum_(k = 1)^(N-1)  (-1)^k cos((x-1/2) (pi k )/N)cos^(2t+1)((pi k )/ (2N)) \ 
+partial / (partial x) P_N (x,t) =& -(2 pi)/N   sum (-1)^k  k/N sin((x-1/2) pk)  cos^(2t+1)((pi k )/ (2N))   \
+
+$
+[现在关注它们导数的符号。注意到 $cos(pk2)$随着 k 增大单减。 令 $kappa = (pi k)/ (N) in (0, pi)$]
+
+
+$
+&sum k pi/N sin((x-1/2) pk)  cos^(2t+1)((pi k )/ (2N)) \
+=&"Im" lr([ sum kappa e^(i(x-1/2)kappa) cos^(2t+1)(kappa/2)   ])
+$}
+
+假设 N 趋于无穷，那么
+
+$
+partial / (partial x) P_1 (x,t) ->& -2   integral_0^pi  kappa sin((x-1 / 2) kappa )  cos^(2t+1)(kappa/2) d kappa \
+$
+
+$
+P_1 (x,t) =& 2/pi integral_0^pi cos[(x - 1/2) kappa]*cos[kappa/2*(2 t + 1)] d kappa \
+=& 1/pi [sin[pi (1 + t - x)]/(1 + t - x) + sin[pi (t + x)]/(t + x)]
+$
+
+]
+
+
+$
+P(x,t+1) - P(x,t) =& -2/N sum (cos[(k pi)/(2 N)]^(1 + 2 t)
+  cos[(k pi (-(1/2) + x))/N] sin[(k pi)/(2 N)]^2)
+
+$
+#lemma()[
+$I(i, j, i+1)$
+]
+#proof()[
+$
+I(i, i, t+1) =& 
+F_f^((1))  (I)(i,j,t) F_f^((2))  (I)(i,j,t) \
+&- sum_(l,k) (partial)/(partial y_i) (partial)/(partial y_j) lr(((P_1(l,t)P_N (k,t) - I(l,k,t))R(l,k)), size:#160% )
+$
+令 $cal(M) = mat(-5/144, 1/72, 1/48; 1/72, -1/9, 1/72; 1/48, 1/72, -5/144)$。 
+由@table:inter_bond 可以得到
+
+
+
+]
+#lemma[P(x, t+1)-P(x,t)]
+#proof[
+#figure(
+  
+  table(
+    columns: (auto, auto),
+    align: (horizon, center),
+    inset: 14pt,
+    table.header([$x$], [$P(x, t+1)-P(x,t)$]),
+
+  $x=1$,
+  $ Gamma[3/2 + t]/(sqrt(pi) Gamma[3 + t]) $,
+  
+  $x=2$,
+  $ ((-3 + t) Gamma[3/2 + t])/(sqrt(pi) Gamma[4 + t]) $,
+  
+  $x=3$,
+  $ ((-11 + t) Gamma[3/2 + t])/(sqrt(pi) Gamma[5 + t]) $,
+  
+  $x=4$,
+  $ ((-23 + t) Gamma[3/2 + t])/(sqrt(pi) Gamma[6 + t]) $,
+  
+
+), 
+)
+
+从这里可以看出，分母就是简单的 $Gamma(t+x+2)$。但分子有点诡异，在
+
+]
+#lemma()[
+  $|I(i,j,t)| <= P_1(i,t)P_N (j,t)$
+]
+#proof[
+  用归纳法证明
+
+  当 $t=1$ 时，成立
+  
+  假设 $t = n$ 时成立，那么 $t = n+1$ 时
+  $
+    I(t+1) >= -P_1(i,t)P_N (j,t) - sum_(l,k) (partial)/(partial y_i) (partial)/(partial y_j) lr(((P_1(l,t)P_N (k,t) - I(l,k,t))R(l,k)), size:#160% )
+  $
+]
+
+
 
 
 
