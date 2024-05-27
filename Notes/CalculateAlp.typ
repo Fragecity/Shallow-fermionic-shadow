@@ -173,16 +173,18 @@ Then, the action of  $space phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on t
     inset: 14pt,
     align: (horizon, left),
   table.header(
-    $c_i c'_j x_i x_j$, 
-    $space phi.alt  space.quarter Teven Todd phi.alt^(-1) (c_i c'_j x_i x_j)$
+    $x_i x_j$, 
+    $space phi.alt  space.quarter Teven Todd phi.alt^(-1) (x_i x_j)$
     ),
 
   [$i=j=1$ ] ,
-  $1/6 (c_1 x_1 + c_1 x_2 )(c'_2x_1 + c'_2 x_2 )$,
+  $1/3 (x_1+x_2)^2 - 1/6 (x_1^2 + x_2^2)$,
   [$i = 1, j =2, 3$],
-  $1/8 (c_1 x_1 + c_1 x_2 )(4/3 c'_2x_1 + 4/3 c'_2 x_2 + c'_2x_3 + c'_2x_4)$,
-  [$i = 1, j >3$],
-  $1/8 (c_1 x_1 + c_1 x_2 )(c'_j x_(j-2+eta_j) + c'_j x_(j-1+eta_j) + c'_j x_(j+eta_j) + c'_j x_(j+1+eta_j))$,
+  $1/8 (x_1 + x_2 )(x_1 +  x_2 + x_3 + x_4) - 1/24 (x_1 - x_2)^2$,
+  [$i = 1, N>j >3$],
+  $1/8 ( x_1 +  x_2 )(x_(j-2+eta_j) + x_(j-1+eta_j) + x_(j+eta_j) + x_(j+1+eta_j))$,
+  [$i = 1, j=N$],
+  $1/4 ( x_1 +  x_2 )(x_(N-1)+x_(N))$,
 
   [$1<i<2N$, \ $ i=j$],
   $1/24 (c_i x_(i-2+eta_i) + c_i x_(i-1+eta_i)+ c_i x_(i+eta_i) + c_i x_(i+1+eta_i) ) \
@@ -210,6 +212,106 @@ Then, the action of  $space phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on t
 ),
 caption: [The action of the tensor $phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on the space of second order 2N-dimensional polynomials.]
 )<table:Tp2N>
+
+$
+y_i y_j = cases(
+  x_i^2 + 4x_i x_(i+eta_i) +x_(i+eta_i)^2 ", " j = i,
+  (x_i + x_(i+eta_i)) (x_j + x_(j+eta_j))  ",  others",
+)
+
+$
+
+#let y1 = $ y_1$
+#let y2 = $ y_2$
+#let y3 = $ y_3$
+#let y4 = $ y_4$
+#let yj = $ y_j$
+
+#figure(
+  table(
+    // columns: (auto, 70pt, 70pt, 70pt),
+    columns: (auto, auto),
+    inset: 14pt,
+    align: (horizon, left),
+  table.header(
+    $y_i y_j$, 
+    $space phi.alt  space.quarter Teven Todd phi.alt^(-1) (x_i x_j)$
+    ),
+
+  [$i = j = 1$ ] ,
+  $19/36 y_1 y_1 + 1/36 y_2 y_2 + 4/9 y_1 y_2$,
+  [$i=1, j=2$],
+  $1/6 y1 y1 + 23/48 y1 y2 + 3/16 y1 y3 + 5/48 y2 y2 + 1/16 y2 y3 $,
+  [$i = 1, N>j >3$],
+  $3/16 y1 y_(j-1) + 3/8 y1 yj + 3/16 y1 y_(j+1) + 1/16 y2 y_(j-1) + 1/8 y2 y_j + 1/16 y2 y_(j+1)$,
+  [$i = 1, j=N$],
+  $3/16 y1 y_(N-1) + 9/16 y1 y_N + 1/16 y2 y_(N-1) + 3/16 y2 y_N $,
+
+  [$1<i<N$, $j=i$] ,
+  $1/36 y_(i-1) y_(i-1) + 5/18 y_(i-1) y_i + 1/6 y_(i-1) y_(i+1) + 2/9 y_i y_i + 5/18 y_i y_(i+1) + 1/36 y_(i+1) y_(i+1)$,
+  [$1<i<N, j=i+1$],
+  $1/16 y_(i-1) y_(i-1) + 1/8 y_(i-1) y_i + 1/16 y_(i-1) y_(i+1) \
+  + 5/48 y_i y_i + 17/48 y_i y_(i+1) + 1/8 y_(i+1) y_(i+2)\
+  + 5/48 y_(i+1) y_(i+1) + 1/16 y_(i+1)y_(i+2) $,
+  [$1<i<N, N>j>i+1$],
+  $1/16 y_(i-1) y_(j-1) + 1/8 y_(i-1) y_j + 1/16 y_(i-1) y_(j+1) \
+  + 1/8 y_i y_(j-1) + 1/4 y_i y_(j) + 1/8 y_(i+1) y_(j+1)\
+  + 1/16 y_(i+1) y_(j-1) + 1/8 y_(i+1)y_(j) + 1/16 y_(i+1)y_(j+1) $,
+  [$1<i<N, j=N$],
+  $1/16 y_(i-1) y_(N-1) + 3/16 y_(i-1) y_N + 1/8 y_i y_(N-1) + 3/8 y_i y_N \
+  + 1/16 y_(i+1) y_N + 3/16 y_(i) y_N$,
+
+  [$i = j = N$ ] ,
+  $19/36 y_N y_N + 1/36 y_(N-1) y_(N-1) + 4/9 y_(N-1) y_N$,
+  
+  
+),
+caption: [The action of the tensor $phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on the space of second order 2N-dimensional polynomials.]
+)
+
+
+#figure(
+  table(
+    // columns: (auto, 70pt, 70pt, 70pt),
+    columns: (auto, auto),
+    inset: 14pt,
+    align: (horizon, left),
+  table.header(
+    $y_i y_j$, 
+    $space phi.alt  space.quarter Teven Todd phi.alt^(-1) (x_i x_j)$
+    ),
+
+  [$i = j = 1$ ] ,
+  $F(y1 y1) -5/144 y1 y1 - 5/144 y2 y2 + 5/72 y1 y2$,
+  // [$i=1, j=2$],
+  // $F(y1 y2) -1/48 y1 y1 - 1/48 y2 y2 + 1/24 y1 y2 $,
+  // [$i = 1, N>j >3$],
+  // $3/16 y1 y_(j-1) + 3/8 y1 yj + 3/16 y1 y_(j+1) + 1/16 y2 y_(j-1) + 1/8 y2 y_j + 1/16 y2 y_(j+1)$,
+  // [$i = 1, j=N$],
+  // $3/16 y1 y_(N-1) + 9/16 y1 y_N + 1/16 y2 y_(N-1) + 3/16 y2 y_N $,
+
+  [$1<i<N$, $j=i$] ,
+  $-5/144 y_(i-1) y_(i-1) + 1/36 y_(i-1) y_i + 1/24 y_(i-1) y_(i+1) \
+  -1/36 y_(i) y_(i) + 1/36 y_(i) y_(i+1) -5/144 y_(i+1) y_(i+1)$,
+  [$1<=i<N, j=i+1$],
+  $F(y_i y_(i+1)) -1/48 y_i y_i - 1/48 y_(i+1) y_(i+1) + 1/24 y_i y_(i+1) $,
+  // [$1<i<N, N>j>i+1$],
+  // $1/16 y_(i-1) y_(j-1) + 1/8 y_(i-1) y_j + 1/16 y_(i-1) y_(j+1) \
+  // + 1/8 y_i y_(j-1) + 1/4 y_i y_(j) + 1/8 y_(i+1) y_(j+1)\
+  // + 1/16 y_(i+1) y_(j-1) + 1/8 y_(i+1)y_(j) + 1/16 y_(i+1)y_(j+1) $,
+  [$1<i<N, j=N$],
+  $1/16 y_(i-1) y_(N-1) + 3/16 y_(i-1) y_N + 1/8 y_i y_(N-1) + 3/8 y_i y_N \
+  + 1/16 y_(i+1) y_N + 3/16 y_(i) y_N$,
+
+  [$i = j = N$ ] ,
+  $F(y_N y_N) -5/144 y_N y_N - 5/144 y_(N-1) y_(N-1) + 5/72 y_(N-1) y_N$,
+  
+  [other case],
+  $F(y_i y_j)$,
+),
+caption: [The action of the tensor $phi.alt  space.quarter Teven Todd phi.alt^(-1)$ on the space of second order 2N-dimensional polynomials.]
+)
+
 
 
 The subsript $eta_i$ is defined as $eta_i := 1 - (i mod 2)$.  We can see that, $c_(2i-1)$ and $c_(2i)$ are always the same. So do $c'_(2j-1)$ and $c'_(2j)$. Let $b_i = 2c_(2i-1) = 2c_(2i)$ and $b'_j = 2c'_(2j-1) = 2c'_(2j)$, we could further simplify the action of the tensor in the space of second order N-dimensional polynomials $W_N$. 
@@ -464,8 +566,17 @@ $
 ), 
 )
 
-
-
+From this table, we have 
+$
+I(i,i,t+1) = 49/48 F^((1))_f F^((2))_f (I) (i,i,t) - 1/48 P(i,i,t+1) + mat( 1/18,  1/36,    0;
+ 1/36 , 7/36,  1/36;
+   0 ,    1/36,  1/18)(P P-I)
+$
+When $P$ converge, $P = 1/N + epsilon$. Then, we have
+$
+I(i,i,t+1) =& 49/48 F^((1))_f F^((2))_f (I) (i,i,t) + 1/(12N) + epsilon/12 \
+-& 1/36 mat(2,1, ; 1,7,1; space, 1,2      )
+$
 
 
 // Because $T_p(t)(x_i x_j) =  T_p(t)(x_i x_j)   $, we only list the result of $i<=j$. 
@@ -872,7 +983,21 @@ $
 ]
 
 
+// $
+// f(x_1, x_2) = b^(x_1) a^(x_2) = a^(s x_1 + x_2)
 
+// $
+// Suppose $a^s = b$, then the symmetry is
 
+// $
+// x_1 -> x_1 + l \
+// x_2 -> x_2  -l s\
+
+// "or" longSpace s x_1 + x_2 = k r
+// $
+
+// where $a^r = 1$. Thus, when $x_1 -> x_1 + l$, $x_2$ could be $x_2 -l s + k r$. 
+
+// $G = $
 
 #bibliography("refs.bib")

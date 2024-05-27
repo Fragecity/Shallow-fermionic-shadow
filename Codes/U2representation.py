@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensornetwork as tn
 
+
 from QCompTool.Pauli import number
 
 
@@ -16,6 +17,7 @@ def alpha_distribution(d, n) -> list:
         alpha_lst.append(alpha(S, d, n))
 
     return alpha_lst
+
 
 
 def alpha(S, d, n) -> number:
