@@ -5,7 +5,7 @@ The file structure of this register is shown following
 - Data: Some valuable outputs from program.
 - figures
 - doc: documents
-	- notes: Intermediate computations and proofs
+	- deductions: Intermediate computations and proofs
 	- presents: Files for presentations, like PPT.
 	- paper: different drafts of paper
 - src: resource code for the project

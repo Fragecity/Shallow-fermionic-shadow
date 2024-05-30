@@ -1,5 +1,14 @@
-template.pdf
+# 忽略的文件夹
 aux
+backups
+
+
+# 忽略的文件格式
 *.typ
 *.aux
-backups
+*.log
+*.gz
+
+# 忽略的具体文件
+template.pdf
+.gitignore
