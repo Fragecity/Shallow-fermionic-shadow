@@ -1,2 +1,5 @@
 template.pdf
+aux
+*.typ
 *.aux
+backups
