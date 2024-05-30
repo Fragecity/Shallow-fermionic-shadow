@@ -173,13 +173,15 @@ end
 end
 #%% Test
 
-# PolySpread.poly_spread_N
+# PolySpreads.poly_spread_N
+# using .TSpreads
+
 
 # S = [1,4]
 # N = 4
 # pattern = "mix"
 
-# tensor = Majorana_Pauli_form(S, N, pattern)
+# # tensor = Majorana_Pauli_form(S, N, pattern)
 
 
 # TSpreads.alpha(S, N, 5, pattern)[]

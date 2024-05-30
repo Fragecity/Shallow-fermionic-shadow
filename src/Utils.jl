@@ -3,7 +3,8 @@ export Majorana, Majorana_Pauli_form, measure_tensor, tuple_spread_utils, isomet
 
 using Combinatorics
 
-using Paulis
+include("Pauli.jl")
+using .Paulis
 
 
 function Majorana(i::Int, N::Int)
