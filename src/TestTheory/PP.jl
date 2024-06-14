@@ -19,9 +19,15 @@ function Lemma_1_2(N, T)
 	return diff
 end
 
-# function try_test()
-# 	print("Hello")
-# end
+function theorem_1(N)
+
+	function A(t)
+		sum(1:N ÷ 2) do k
+			 cos(k * pi / N)^(4t+2)
+		end 
+	end
+	
+end
 
 
 end # module AnalysisPP
