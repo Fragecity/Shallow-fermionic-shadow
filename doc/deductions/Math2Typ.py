@@ -15,8 +15,12 @@ def replace_bracketed_strings(text):
 # Example usage
 if __name__ == "__main__":
     input_text = """
-	(Sqrt[\[Pi]/2] (1 - 
-   I Erfi[(a - I t \[Beta])/(Sqrt[2] Sqrt[t])]))/(Sqrt[t] \[Beta])
+	1/4 (Cos[(k \[Pi])/(
+     2 n)] (Csc[((k - l) \[Pi])/(2 n)] + Csc[((k + l) \[Pi])/(2 n)]) -
+    Csc[((k - l) \[Pi])/(
+     2 n)] Sin[((k + 2 l (-1 + n) + n - 2 k n) \[Pi])/(2 n)] - 
+   Csc[((k + l) \[Pi])/(
+     2 n)] Sin[((k + 2 l + n - 2 k n - 2 l n) \[Pi])/(2 n)])
 	"""
 
     output_text = replace_bracketed_strings(input_text)
