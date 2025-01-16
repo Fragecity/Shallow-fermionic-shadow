@@ -1,4 +1,6 @@
+
 module SpreadUtils
+include("Paulis.jl")
 export Majorana, Majorana_Pauli_form, measure_tensor, tuple_spread_utils, isometric, isometric_inv
 
 using Combinatorics

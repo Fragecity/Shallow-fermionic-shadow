@@ -1,0 +1,16 @@
+Z Y Z Z Z X Y Z 
+Z X Z Z Z X X Z 
+Z X Z Y Z Y Y Z 
+Z Y Z Y Z Y X Z 
+Z Z X Y Y X Z X 
+Z Z Y Y Y X Z Y 
+Z Z Z X Z Z Z X 
+Z Z X X Y Y Z X 
+Z Z Y X X X Z Y 
+Z Z X Y X Y Z X 
+Z Z Y Y X Y Z Y 
+Z Z Z Y Z Z Z Y 
+Z X Z Z Z Y Y Z 
+Z Y Z Z Z Y X Z 
+Z Z X X X X Z X 
+Z Z Y X Y Y Z Y 
