@@ -1,4 +1,4 @@
-using Plots
+using Plots, LaTeXStrings
 # include("NewGaussian.jl")
 include("alpha_tensor.jl")
 include("alpha.jl")
@@ -30,9 +30,14 @@ colors = [RGB(165/255,28/255,54/255), RGB(122/255, 187/255, 219/255), RGB(132/25
 figure = Plots.plot(size = (800,600))
 S1 = [1 6 11 16]
 plottingDint!(figure, S1, colors[1])
-S2 = [5 6 11 16]
+S2 = [9 10 13 18]
 plottingDint!(figure, S2, colors[2])
 S3 = [1 6 19 20]
 plottingDint!(figure, S3, colors[3])
 S4 = [3 9 15 20]
 plottingDint!(figure, S4, colors[4])
+
+Plots.title!(L"d_{\mathrm{int}}=5")
+Plots.ylabel!(L"\alpha_{S,d}", ylabelfontsize = 16)
+Plots.xlabel!("depth", ylabelfontsize = 20)
+Plots.pdf("fix_dint.pdf")
