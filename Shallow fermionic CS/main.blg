@@ -1,0 +1,87 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: unsrt.bst
+Database file #1: mainNotes.bib
+Warning--I didn't find a database entry for "lieb1961two"
+Warning--I didn't find a database entry for "si1996kosterlitz"
+Warning--I didn't find a database entry for "aspuru2005simulated"
+Warning--I didn't find a database entry for "whitfield2011simulation"
+Warning--I didn't find a database entry for "auerbach2012interacting"
+Warning--I didn't find a database entry for "cao2019quantum"
+Warning--I didn't find a database entry for "tilly2022variational"
+Warning--I didn't find a database entry for "cerezo2021variational"
+Warning--I didn't find a database entry for "foulkes2001quantum"
+Warning--I didn't find a database entry for "carlson2015quantum"
+Warning--I didn't find a database entry for "huang2020predicting"
+Warning--I didn't find a database entry for "bonet2020nearly"
+Warning--I didn't find a database entry for "Zhao21Fermionic"
+Warning--I didn't find a database entry for "low2022classical"
+Warning--I didn't find a database entry for "wan2022matchgate"
+Warning--I didn't find a database entry for "zhao2024group"
+Warning--I didn't find a database entry for "heyraud2024unified"
+Warning--I didn't find a database entry for "patel2008optimal"
+Warning--I didn't find a database entry for "jiang2020optimal"
+Warning--I didn't find a database entry for "jiang2018quantum"
+Warning--I didn't find a database entry for "arute2019quantum"
+Warning--I didn't find a database entry for "Wu21Strong"
+Warning--I didn't find a database entry for "cao2023generation"
+Warning--I didn't find a database entry for "bertoni2024shallow"
+Warning--I didn't find a database entry for "schuster2024random"
+Warning--I didn't find a database entry for "rozon2024optimal"
+Warning--I didn't find a database entry for "ma2024construct"
+Warning--I didn't find a database entry for "king2024triply"
+Warning--I didn't find a database entry for "Jiang18Quantum"
+Warning--I didn't find a database entry for "greiter20141d"
+Warning--I didn't find a database entry for "borla2021gauging"
+Warning--I didn't find a database entry for "marsolais2021equivalence"
+Warning--I didn't find a database entry for "hackl2021bosonic"
+Warning--I didn't find a database entry for "valiant2002quantum"
+Warning--I didn't find a database entry for "chen2021robust"
+Warning--I didn't find a database entry for "turner2011topological"
+Warning--I didn't find a database entry for "giuggioli2020exact"
+Warning--I didn't find a database entry for "lawler2010random"
+Warning--I didn't find a database entry for "kitaev2001unpaired"
+Warning--I didn't find a database entry for "haferkamp2022linear"
+You've used 0 entries,
+            1791 wiz_defined-function locations,
+            488 strings with 4228 characters,
+and the built_in function-call counts, 18 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 7
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There were 40 warnings)
